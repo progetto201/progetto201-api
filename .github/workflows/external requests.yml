@@ -28,6 +28,8 @@ jobs:
         chmod +x automysql/automysql.sh
         ./automysql/automysql.sh -mysql -mysqlforphp
         echo "try to change pwd of mysql"
+        find / -type s
+        sudo /etc/init.d/mysql start
         ./automysql/automysql.sh -mysqlpass test
         mysql -V
 
