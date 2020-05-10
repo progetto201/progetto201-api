@@ -54,7 +54,7 @@ jobs:
         echo "try to import sql file"
         
         echo "try to import sql file"
-        mysql -h 127.0.0.1 -P 3306 -u root -p test < "db100_100.sql"
+        mysql -h 127.0.0.1 -P 3306 --user=root --password=test < "db100_100.sql"
     
     # "Install" the api by putting it in the www folder 
     - name: Move api to the www folder
