@@ -29,10 +29,6 @@ jobs:
         ./automysql/automysql.sh -mysql -mysqlforphp
         echo "try to start mysql"
         sudo /etc/init.d/mysql start
-        echo "print conf.d"
-        sudo cat /etc/mysql/conf.d/
-        echo "print mysql.conf.d"
-        sudo cat /etc/mysql/mysql.conf.d/
         echo "start specifing socket file"
         sudo /usr/sbin/mysqld --defaults-file=/etc/mysql/my.cnf --basedir=/usr --datadir=/var/lib/mysql --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/run/mysqld/mysqld.sock &
 
