@@ -43,7 +43,14 @@ jobs:
     - name: Config MySQL
       run: |
         ls -a
+        echo "check if mysql is present"
+        mysql -V
+        echo "restart mysql service"
+        sudo service mysql restart
+        sudo service mysql status
+        echo "try to import sql file"
         sudo mysql < "db100_100.sql"
+        echo "try to change pwd of mysql"
         ./automysql/automysql.sh -mysqlpass test
     
     # "Install" the api by putting it in the www folder 
