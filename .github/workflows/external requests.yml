@@ -20,7 +20,7 @@ jobs:
         ls -a
         chmod +x autoapachephp/autoapachephp.sh
         ./autoapachephp/autoapachephp.sh -apachephp
-        httpd -v
+        sudo apachectl -V
     
     # Install MySQL
     - name: Use autoinstall to install mysql
