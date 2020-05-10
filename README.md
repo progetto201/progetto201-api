@@ -1,4 +1,3 @@
-\mainpage
 # PROGETTO201-API
 This is the backend api of the "progetto201" project.
 
@@ -22,7 +21,7 @@ Posizionare la cartella ```api``` (con tutto il suo contenuto)
 nella cartella servita dal server web (per apache ```/var/www/html```)
 
 ## Descrizione
-Per la documentazione di tutti gli script andare in [questa pagina]()
+Per la documentazione di tutti gli script andare in [questa pagina](https://progetto201.github.io/progetto201-api/doc/html/files.html)
 
 ## Sviluppo e espansione
 

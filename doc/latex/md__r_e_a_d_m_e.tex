@@ -1,4 +1,4 @@
-This is the backend api of the \char`\"{}progetto201\char`\"{} project.\hypertarget{index_autotoc_md1}{}\doxysection{Sezioni}\label{index_autotoc_md1}
+This is the backend api of the \char`\"{}progetto201\char`\"{} project.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Sezioni}\label{md__r_e_a_d_m_e_autotoc_md1}
 
 \begin{DoxyItemize}
 \item \href{\#Introduzione}{\texttt{ Introduzione}}
@@ -8,16 +8,16 @@ This is the backend api of the \char`\"{}progetto201\char`\"{} project.\hypertar
 \item \href{\#requisiti}{\texttt{ Requisiti}}
 \item \href{\#changelog}{\texttt{ Changelog}}
 \item \href{\#autore}{\texttt{ Autore}}
-\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{Introduzione}\label{index_autotoc_md2}
-Gli script si occupano di gestire i dati provvenienti dalla frontend e di gestirli inserendo/aggiornando/rimuovendo dati sul database.\hypertarget{index_autotoc_md3}{}\doxysection{Guida all\textquotesingle{}uso}\label{index_autotoc_md3}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Introduzione}\label{md__r_e_a_d_m_e_autotoc_md2}
+Gli script si occupano di gestire i dati provvenienti dalla frontend e di gestirli inserendo/aggiornando/rimuovendo dati sul database.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{Guida all\textquotesingle{}uso}\label{md__r_e_a_d_m_e_autotoc_md3}
 Importare in My\+S\+QL il database con tutte le tabelle con il file {\ttfamily db100\+\_\+100.\+sql}
 
-Posizionare la cartella {\ttfamily api} (con tutto il suo contenuto) nella cartella servita dal server web (per apache {\ttfamily /var/www/html})\hypertarget{index_autotoc_md4}{}\doxysection{Descrizione}\label{index_autotoc_md4}
-Per la documentazione di tutti gli script andare in \href{https://progetto201.github.io/progetto201-api/doc/html/files.html}{\texttt{ questa pagina}}\hypertarget{index_autotoc_md5}{}\doxysection{Sviluppo e espansione}\label{index_autotoc_md5}
-\hypertarget{index_autotoc_md6}{}\doxysubsection{Aggiungere planimetrie}\label{index_autotoc_md6}
-Per aggiungere planimetrie non e\textquotesingle{} necessario modificare righe di codice\+: basta inserire nella cartella delle planimetrie il documento svg e selezionarlo dall\textquotesingle{}interfaccia\hypertarget{index_autotoc_md7}{}\doxysubsection{Aggiungere colori dell\textquotesingle{}interfaccia}\label{index_autotoc_md7}
-Attualmente non e\textquotesingle{} possibile aggiugere colori dell\textquotesingle{}interfaccia dall\textquotesingle{}interfaccia stessa\+: occorre aggiungere un record nella tabella {\ttfamily t\+\_\+colors} del database.\hypertarget{index_autotoc_md8}{}\doxysubsection{Aggiungere/togliere label alla planimetria}\label{index_autotoc_md8}
-E\textquotesingle{} possibile modificare i label direttamente dall\textquotesingle{}interfaccia nella pagina delle impostazioni\hypertarget{index_autotoc_md9}{}\doxysubsection{Aggiungere nuovi tipi di sensore al sistema}\label{index_autotoc_md9}
+Posizionare la cartella {\ttfamily api} (con tutto il suo contenuto) nella cartella servita dal server web (per apache {\ttfamily /var/www/html})\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{Descrizione}\label{md__r_e_a_d_m_e_autotoc_md4}
+Per la documentazione di tutti gli script andare in \mbox{[}questa pagina\mbox{]}()\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{Sviluppo e espansione}\label{md__r_e_a_d_m_e_autotoc_md5}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{Aggiungere planimetrie}\label{md__r_e_a_d_m_e_autotoc_md6}
+Per aggiungere planimetrie non e\textquotesingle{} necessario modificare righe di codice\+: basta inserire nella cartella delle planimetrie il documento svg e selezionarlo dall\textquotesingle{}interfaccia\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{Aggiungere colori dell\textquotesingle{}interfaccia}\label{md__r_e_a_d_m_e_autotoc_md7}
+Attualmente non e\textquotesingle{} possibile aggiugere colori dell\textquotesingle{}interfaccia dall\textquotesingle{}interfaccia stessa\+: occorre aggiungere un record nella tabella {\ttfamily t\+\_\+colors} del database.\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsection{Aggiungere/togliere label alla planimetria}\label{md__r_e_a_d_m_e_autotoc_md8}
+E\textquotesingle{} possibile modificare i label direttamente dall\textquotesingle{}interfaccia nella pagina delle impostazioni\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{Aggiungere nuovi tipi di sensore al sistema}\label{md__r_e_a_d_m_e_autotoc_md9}
 Per aggiungere nuovi sensori al sistema, oltre ad adattare lo script \href{https://github.com/progetto201/mqtt_manager}{\texttt{ mqtt\+\_\+manager}}, occorre aggiungere allo script {\ttfamily /api/sensors/columnnames.php} i nuovi tipi.
 
 Esempio, alla prima versione l\textquotesingle{}api accetta un sensore, il tipo \char`\"{}0\char`\"{}\+: 
@@ -86,13 +86,13 @@ E infine modificare lo script {\ttfamily /api/sysinfos/rssi.php}\+: aggiungere a
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{rssi_8php_a30b171fe8a5ff9619471dd477612d743}{\$data\_tables}} = array(\textcolor{stringliteral}{"t\_type0\_data"}, \textcolor{stringliteral}{"t\_type1\_data"}, \textcolor{stringliteral}{"t\_type2\_data"});}
 \end{DoxyCode}
-\hypertarget{index_autotoc_md10}{}\doxysection{Requisiti}\label{index_autotoc_md10}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysection{Requisiti}\label{md__r_e_a_d_m_e_autotoc_md10}
 
 \begin{DoxyItemize}
 \item php
 \item server web
 \item mysql
-\end{DoxyItemize}\hypertarget{index_autotoc_md11}{}\doxysection{Changelog}\label{index_autotoc_md11}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{Changelog}\label{md__r_e_a_d_m_e_autotoc_md11}
 {\bfseries{01\+\_\+01 2020-\/05-\/10\+:}} ~\newline
- Primo commit\hypertarget{index_autotoc_md12}{}\doxysection{Autore}\label{index_autotoc_md12}
+ Primo commit\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{Autore}\label{md__r_e_a_d_m_e_autotoc_md12}
 Zenaro Stefano 
