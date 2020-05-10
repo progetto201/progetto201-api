@@ -27,6 +27,8 @@ jobs:
       run: |
         chmod +x automysql/automysql.sh
         ./automysql/automysql.sh -mysql -mysqlforphp
+        sudo mkdir -p /var/run/mysqld
+        sudo chown mysql:mysql /var/run/mysqld
         sudo mysqld_safe --skip-grant-tables -e "update user set authentication_string=password('mynewpassword') where user='root';flush privileges;"
         mysql -V
 
