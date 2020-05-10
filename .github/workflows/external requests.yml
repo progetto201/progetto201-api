@@ -27,9 +27,13 @@ jobs:
       run: |
         chmod +x automysql/automysql.sh
         ./automysql/automysql.sh -mysql -mysqlforphp
-        echo "try to change pwd of mysql"
-        find / -type s
+        echo "try to start mysql"
         sudo /etc/init.d/mysql start
+        echo "print config"
+        sudo cat /etc/mysql/my.cnf
+        echo "start specifing socket file"
+        sudo /usr/sbin/mysqld --defaults-file=/etc/mysql/my.cnf --basedir=/usr --datadir=/var/lib/mysql --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/run/mysqld/mysqld.sock
+
         ./automysql/automysql.sh -mysqlpass test
         mysql -V
 
