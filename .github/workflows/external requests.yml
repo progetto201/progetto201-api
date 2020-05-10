@@ -27,7 +27,7 @@ jobs:
       run: |
         chmod +x automysql/automysql.sh
         ./automysql/automysql.sh -mysql -mysqlforphp
-        sudo mysqld_safe --skip-grant-tables < "update user set authentication_string=password('mynewpassword') where user='root';flush privileges;"
+        sudo mysqld_safe --skip-grant-tables -e "update user set authentication_string=password('mynewpassword') where user='root';flush privileges;"
         mysql -V
 
     # Install Python
