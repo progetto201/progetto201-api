@@ -27,6 +27,8 @@ jobs:
       run: |
         chmod +x automysql/automysql.sh
         ./automysql/automysql.sh -mysql -mysqlforphp
+        echo "try to change pwd of mysql"
+        ./automysql/automysql.sh -mysqlpass test
         mysql -V
 
     # Install Python
@@ -49,8 +51,7 @@ jobs:
         sudo service mysql restart
         sudo service mysql status
         echo "try to import sql file"
-        echo "try to change pwd of mysql"
-        ./automysql/automysql.sh -mysqlpass test
+        
         echo "try to import sql file"
         mysql -h 127.0.0.1 -P 3306 -u root -p test < "db100_100.sql"
     
