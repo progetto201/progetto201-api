@@ -1,0 +1,199 @@
+\hypertarget{usercolor_8php}{}\doxysection{api/colors/usercolor.php File Reference}
+\label{usercolor_8php}\index{api/colors/usercolor.php@{api/colors/usercolor.php}}
+
+
+{\bfseries{U\+S\+E\+R\+C\+O\+L\+OR}}\+: manages user\textquotesingle{}s color.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{usercolor_8php_a8a716faa30eaeb7c11eb9caa2cf25698}{get\+\_\+usercolor}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns the UI color data inside the \textquotesingle{}data\textquotesingle{} property of an array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}{post\+\_\+usercolor}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Set\textquotesingle{}s the new UI color passed by the client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{usercolor_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{U\+S\+E\+R\+C\+O\+L\+OR}}\+: manages user\textquotesingle{}s color. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD -\/-\/$>$ returns user color
+\item {\bfseries{P\+O\+ST}} M\+E\+T\+H\+OD -\/-\/$>$ retrieves user color
+\end{DoxyItemize}\hypertarget{usercolor_8php_autotoc_md15}{}\doxysubsubsection{Description}\label{usercolor_8php_autotoc_md15}
+This script sets the returned {\bfseries{content type to J\+S\+ON}}, {\bfseries{includes the \mbox{\hyperlink{db__connection_8php}{db\+\_\+connection.\+php}} script}} \begin{quote}
+It is used to connect to My\+S\+QL and execute basic S\+E\+L\+E\+CT queries \end{quote}
+and then defines the response array.
+
+Two functions are defined\+: \begin{DoxyVerb}get_usercolor($t_conn_res)
+\end{DoxyVerb}
+ Selects the user color from the database so that the script can echo it \begin{DoxyVerb}post_usercolor($t_conn_res)
+\end{DoxyVerb}
+ Sets the user color inside the options table (colors param must be passed)
+
+If the script isn\textquotesingle{}t included it tries to connect to the database, and checks the request method\+:
+\begin{DoxyItemize}
+\item if the method is G\+ET it calls get\+\_\+usercolor(\$t\+\_\+conn\+\_\+res)
+\item if the method is P\+O\+ST it calls post\+\_\+usercolor(\$t\+\_\+conn\+\_\+res)
+\end{DoxyItemize}
+
+When the called function ends the connection to the DB gets terminated, and data (or errors) is collected inside the response array. The response array gets echoed to the client in J\+S\+ON format
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{200}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{201}} -\/ main\+: No data but also No errors
+\item {\bfseries{210}} -\/ \mbox{\hyperlink{usercolor_8php_a8a716faa30eaeb7c11eb9caa2cf25698}{get\+\_\+usercolor()}}\+: The query returned an unexpected number of records
+\item {\bfseries{211}} -\/ \mbox{\hyperlink{usercolor_8php_a8a716faa30eaeb7c11eb9caa2cf25698}{get\+\_\+usercolor()}}\+: Error during query execution
+\item {\bfseries{220}} -\/ \mbox{\hyperlink{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}{post\+\_\+usercolor()}}\+: Unable to change the current color for the new one (the user sent the current color or a non existing one)
+\item {\bfseries{221}} -\/ \mbox{\hyperlink{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}{post\+\_\+usercolor()}}\+: Unable to execute U\+P\+D\+A\+TE query (query error)
+\item {\bfseries{222}} -\/ \mbox{\hyperlink{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}{post\+\_\+usercolor()}}\+: Parameter \textquotesingle{}color\textquotesingle{} wasn\textquotesingle{}t set"
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{usercolor_8php_a8a716faa30eaeb7c11eb9caa2cf25698}\label{usercolor_8php_a8a716faa30eaeb7c11eb9caa2cf25698}} 
+\index{usercolor.php@{usercolor.php}!get\_usercolor@{get\_usercolor}}
+\index{get\_usercolor@{get\_usercolor}!usercolor.php@{usercolor.php}}
+\doxysubsubsection{\texorpdfstring{get\_usercolor()}{get\_usercolor()}}
+{\footnotesize\ttfamily get\+\_\+usercolor (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns the UI color data inside the \textquotesingle{}data\textquotesingle{} property of an array. 
+
+The function, using the mysqli object inside the parameter \$t\+\_\+conn\+\_\+res (\$t\+\_\+conn\+\_\+res\mbox{[}\textquotesingle{}connect\+\_\+obj\textquotesingle{}\mbox{]}), executes the query \textquotesingle{}\$query\textquotesingle{} which collects the color previously selected by the user. \begin{quote}
+There is always a value (the default one is \textquotesingle{}red\textquotesingle{}). \end{quote}
+
+
+If the query execution throws an error the error is collected inside the \textquotesingle{}errors\textquotesingle{} property of the array (which is also an array). The errors inside the \textquotesingle{}errors\textquotesingle{} array have three properties\+:
+\begin{DoxyItemize}
+\item {\bfseries{id}}\+: identifies the error, it is useful for the frontend
+\item {\bfseries{htmlcode}}\+: it is the status code of the response that will be given to the client
+\item {\bfseries{message}}\+: details of the error \begin{quote}
+the message is in english, language translation is going to be managed from the frontend \end{quote}
+
+\end{DoxyItemize}
+
+The user\textquotesingle{}s color data is an array and is structured as following\+:
+\begin{DoxyItemize}
+\item {\bfseries{id}}\+: identification number from the database
+\item {\bfseries{color\+\_\+name}}\+: name of the color
+\item {\bfseries{color\+\_\+hex}}\+: hexadecimal value of the color \begin{quote}
+format of color\+\_\+hex\+:
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#RRGGBB}}
+\end{DoxyCode}
+ \end{quote}
+
+\end{DoxyItemize}
+
+Example with no errors 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GET /api/colors/usercolor.php}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: \{}
+\DoxyCodeLine{      \textcolor{stringliteral}{"id"}: \textcolor{stringliteral}{"4384"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#f44336"}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If there are errors they will be pushed inside the errors array. Possible returned errors\+:
+\begin{DoxyItemize}
+\item {\bfseries{210}}\+: The query returned an unexpected number of records
+\item {\bfseries{211}}\+: Error during query execution
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the connection object (connection was successful) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with color data or errors 
+\end{DoxyReturn}
+\mbox{\Hypertarget{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}\label{usercolor_8php_a176c198f2f3fd8b18def0f3ca7cfd858}} 
+\index{usercolor.php@{usercolor.php}!post\_usercolor@{post\_usercolor}}
+\index{post\_usercolor@{post\_usercolor}!usercolor.php@{usercolor.php}}
+\doxysubsubsection{\texorpdfstring{post\_usercolor()}{post\_usercolor()}}
+{\footnotesize\ttfamily post\+\_\+usercolor (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Set\textquotesingle{}s the new UI color passed by the client. 
+
+The function checks if a P\+O\+ST parameter called \textquotesingle{}color\textquotesingle{} was passed, if so it executes the query that makes sure that the color exists inside the colors table and modifies the set color inside the options table. For last it checks if the query modified one row (as expected) and returns the color inside the \textquotesingle{}data\textquotesingle{} property of the returned array.
+
+Example with no errors 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{POST /api/colors/usercolor.php (color=red)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: \textcolor{stringliteral}{"red"}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If there are errors they will be pushed inside the errors array. Possible returned errors\+:
+\begin{DoxyItemize}
+\item {\bfseries{220}}\+: Unable to change the current color for the new one (the user sent the current color or a non existing one)
+\item {\bfseries{221}}\+: Unable to execute U\+P\+D\+A\+TE query (query error)
+\item {\bfseries{222}}\+: Parameter \textquotesingle{}color\textquotesingle{} wasn\textquotesingle{}t set"
+\end{DoxyItemize}
+
+The errors inside the \textquotesingle{}errors\textquotesingle{} array have three properties\+:
+\begin{DoxyItemize}
+\item {\bfseries{id}}\+: identifies the error, it is useful for the frontend
+\item {\bfseries{htmlcode}}\+: it is the status code of the response that will be given to the client
+\item {\bfseries{message}}\+: details of the error \begin{quote}
+the message is in english, language translation is going to be managed from the frontend \end{quote}
+
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with color data or errors 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{usercolor_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{usercolor_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{usercolor.php@{usercolor.php}!\$response@{\$response}}
+\index{\$response@{\$response}!usercolor.php@{usercolor.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

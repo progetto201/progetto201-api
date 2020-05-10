@@ -1,0 +1,136 @@
+\hypertarget{planlabels_8php}{}\doxysection{api/options/planlabels.php File Reference}
+\label{planlabels_8php}\index{api/options/planlabels.php@{api/options/planlabels.php}}
+
+
+{\bfseries{P\+L\+A\+N\+L\+A\+B\+E\+LS}}\+: manages plan\textquotesingle{}s labels.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Inserts/removes label data to the database. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{planlabels_8php_a027284df6f647b1171c2f5fde15aa697}{get\+\_\+labels}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns labels data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{planlabels_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\char`\"{}errors\char`\"{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{P\+L\+A\+N\+L\+A\+B\+E\+LS}}\+: manages plan\textquotesingle{}s labels. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD -\/-\/$>$ returns labels data
+\item {\bfseries{P\+O\+ST}} M\+E\+T\+H\+OD -\/-\/$>$ add or removes a label
+\end{DoxyItemize}\hypertarget{planlabels_8php_autotoc_md17}{}\doxysubsubsection{Description}\label{planlabels_8php_autotoc_md17}
+This script sets the returned {\bfseries{content type to J\+S\+ON}}, {\bfseries{includes the \mbox{\hyperlink{db__connection_8php}{db\+\_\+connection.\+php}} script}} \begin{quote}
+It is used to connect to My\+S\+QL and execute basic S\+E\+L\+E\+CT queries \end{quote}
+and then defines the response array.
+
+Two functions are defined\+: \begin{DoxyVerb} post_labels()
+\end{DoxyVerb}
+ Inserts/removes label data to the database. \begin{DoxyVerb} get_labels()
+\end{DoxyVerb}
+ Returns labels data
+
+If the script isn\textquotesingle{}t included it tries to connect to the database, and checks the request method\+:
+\begin{DoxyItemize}
+\item if the method is G\+ET it calls the \mbox{\hyperlink{planlabels_8php_a027284df6f647b1171c2f5fde15aa697}{get\+\_\+labels()}} function
+\item if the method is P\+O\+ST it calls the \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}} function
+\end{DoxyItemize}
+
+When the called function ends the connection to the DB gets terminated, and data (or errors) is collected inside the response array. The response array gets echoed to the client in J\+S\+ON format
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{1100}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{1101}} -\/ main\+: No data but also No errors
+\item {\bfseries{1110}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: No rows affected (maybe the same values where sent?)
+\item {\bfseries{1111}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: Unable to execute I\+N\+S\+E\+R\+T/\+U\+P\+D\+A\+TE query
+\item {\bfseries{1112}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: Couldn\textquotesingle{}t remove the label, no rows affected
+\item {\bfseries{1113}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: Unable to execute D\+E\+L\+E\+TE query
+\item {\bfseries{1114}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: the required parameters are not set in the request
+\item {\bfseries{1115}} -\/ \mbox{\hyperlink{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}{post\+\_\+labels()}}\+: There is an error in the S\+QL instruction
+\item {\bfseries{1120}} -\/ \mbox{\hyperlink{planlabels_8php_a027284df6f647b1171c2f5fde15aa697}{get\+\_\+labels()}}\+: Error during query execution
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{planlabels_8php_a027284df6f647b1171c2f5fde15aa697}\label{planlabels_8php_a027284df6f647b1171c2f5fde15aa697}} 
+\index{planlabels.php@{planlabels.php}!get\_labels@{get\_labels}}
+\index{get\_labels@{get\_labels}!planlabels.php@{planlabels.php}}
+\doxysubsubsection{\texorpdfstring{get\_labels()}{get\_labels()}}
+{\footnotesize\ttfamily get\+\_\+labels (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns labels data. 
+
+The function executes a S\+E\+L\+E\+CT query to select the labels data.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}\label{planlabels_8php_a63da149e1c19489a63a10defc5a47ef7}} 
+\index{planlabels.php@{planlabels.php}!post\_labels@{post\_labels}}
+\index{post\_labels@{post\_labels}!planlabels.php@{planlabels.php}}
+\doxysubsubsection{\texorpdfstring{post\_labels()}{post\_labels()}}
+{\footnotesize\ttfamily post\+\_\+labels (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Inserts/removes label data to the database. 
+
+The function checks if all the parameters have been passed inside the request.
+
+Then it tries to insert the data and if the data is a duplicate, it updates the old data.
+
+If the client sends only an id and a remove parameter, the function tries to remove the label from the table
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]should log the S\+QL error to a file... (should also log everything else) 
+
+the \char`\"{}error\char`\"{} 1110 should be a warning \end{DoxyRefDesc}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{planlabels_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{planlabels_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{planlabels.php@{planlabels.php}!\$response@{\$response}}
+\index{\$response@{\$response}!planlabels.php@{planlabels.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\char`\"{}errors\char`\"{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

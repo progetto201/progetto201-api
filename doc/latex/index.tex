@@ -1,0 +1,99 @@
+\hypertarget{index_autotoc_md0}{}\doxysection{P\+R\+O\+G\+E\+T\+T\+O201-\/\+A\+PI}\label{index_autotoc_md0}
+This is the backend api of the \char`\"{}progetto201\char`\"{} project.\hypertarget{index_autotoc_md1}{}\doxysubsection{Sezioni}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item \href{\#Introduzione}{\texttt{ Introduzione}}
+\item \href{\#guida-all-uso}{\texttt{ Guida all\textquotesingle{}uso}}
+\item \href{\#descrizione}{\texttt{ Descrizione}}
+\item \href{\#sviluppo-e-espansione}{\texttt{ Sviluppo e espansione}}
+\item \href{\#requisiti}{\texttt{ Requisiti}}
+\item \href{\#changelog}{\texttt{ Changelog}}
+\item \href{\#autore}{\texttt{ Autore}}
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysubsection{Introduzione}\label{index_autotoc_md2}
+Gli script si occupano di gestire i dati provvenienti dalla frontend e di gestirli inserendo/aggiornando/rimuovendo dati sul database.\hypertarget{index_autotoc_md3}{}\doxysubsection{Guida all\textquotesingle{}uso}\label{index_autotoc_md3}
+Importare in My\+S\+QL il database con tutte le tabelle con il file {\ttfamily db100\+\_\+100.\+sql}
+
+Posizionare la cartella {\ttfamily api} (con tutto il suo contenuto) nella cartella servita dal server web (per apache {\ttfamily /var/www/html})\hypertarget{index_autotoc_md4}{}\doxysubsection{Descrizione}\label{index_autotoc_md4}
+Per la documentazione di tutti gli script andare in \mbox{[}questa pagina\mbox{]}()\hypertarget{index_autotoc_md5}{}\doxysubsection{Sviluppo e espansione}\label{index_autotoc_md5}
+\hypertarget{index_autotoc_md6}{}\doxysubsubsection{Aggiungere planimetrie}\label{index_autotoc_md6}
+Per aggiungere planimetrie non e\textquotesingle{} necessario modificare righe di codice\+: basta inserire nella cartella delle planimetrie il documento svg e selezionarlo dall\textquotesingle{}interfaccia\hypertarget{index_autotoc_md7}{}\doxysubsubsection{Aggiungere colori dell\textquotesingle{}interfaccia}\label{index_autotoc_md7}
+Attualmente non e\textquotesingle{} possibile aggiugere colori dell\textquotesingle{}interfaccia dall\textquotesingle{}interfaccia stessa\+: occorre aggiungere un record nella tabella {\ttfamily t\+\_\+colors} del database.\hypertarget{index_autotoc_md8}{}\doxysubsubsection{Aggiungere/togliere label alla planimetria}\label{index_autotoc_md8}
+E\textquotesingle{} possibile modificare i label direttamente dall\textquotesingle{}interfaccia nella pagina delle impostazioni\hypertarget{index_autotoc_md9}{}\doxysubsubsection{Aggiungere nuovi tipi di sensore al sistema}\label{index_autotoc_md9}
+Per aggiungere nuovi sensori al sistema, oltre ad adattare lo script \href{https://github.com/progetto201/mqtt_manager}{\texttt{ mqtt\+\_\+manager}}, occorre aggiungere allo script {\ttfamily /api/sensors/columnnames.php} i nuovi tipi.
+
+Esempio, alla prima versione l\textquotesingle{}api accetta un sensore, il tipo \char`\"{}0\char`\"{}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{columnnames_8php_ad9404234fc8b66e3b57df12629bf5d21}{\$nodetypes}} = array(\textcolor{stringliteral}{"0"} => \textcolor{stringliteral}{"t\_type0\_data"});}
+\end{DoxyCode}
+ Se si dovessero aggiungere due nuovi tipi occorre aggiungerli all\textquotesingle{}array in questo modo\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{columnnames_8php_ad9404234fc8b66e3b57df12629bf5d21}{\$nodetypes}} = array(\textcolor{stringliteral}{"0"} => \textcolor{stringliteral}{"t\_type0\_data"}, \textcolor{stringliteral}{"1"} => \textcolor{stringliteral}{"t\_type1\_data"}, \textcolor{stringliteral}{"2"} => \textcolor{stringliteral}{"t\_type2\_data"});}
+\end{DoxyCode}
+
+
+Poi occorre anche aggiungere i nuovi tipi allo script {\ttfamily /api/sensors/data.php}\+:
+\begin{DoxyEnumerate}
+\item andare nella funzione {\ttfamily \mbox{\hyperlink{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}{get\+Data()}}}, e aggiungere uno/piu\textquotesingle{} elseif nel punto\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\$nodetype === 0)\{}
+\DoxyCodeLine{    \$action\_res = \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{getDataType0}}(\$t\_conn\_res, \$nodeid, \$min\_timestamp, \$max\_timestamp);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{    \textcolor{comment}{// errore: tipo non riconosciuto}}
+\DoxyCodeLine{    array\_push(\$action\_res[\textcolor{stringliteral}{'errors'}], array(\textcolor{stringliteral}{'id'} => 930,}
+\DoxyCodeLine{                                            \textcolor{stringliteral}{'htmlcode'} => 422,}
+\DoxyCodeLine{                                            \textcolor{stringliteral}{'message'} => \textcolor{stringliteral}{"can't get data for this node type (not supported)"}));}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Ad esempio\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\$nodetype === 0)\{}
+\DoxyCodeLine{    \$action\_res = \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{getDataType0}}(\$t\_conn\_res, \$nodeid, \$min\_timestamp, \$max\_timestamp);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{elseif (\$nodetype === 1)\{}
+\DoxyCodeLine{    \$action\_res = getDataType1(\$t\_conn\_res, \$nodeid, \$min\_timestamp, \$max\_timestamp);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{elseif (\$nodetype === 2)\{}
+\DoxyCodeLine{    \$action\_res = getDataType2(\$t\_conn\_res, \$nodeid, \$min\_timestamp, \$max\_timestamp);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{    \textcolor{comment}{// errore: tipo non riconosciuto}}
+\DoxyCodeLine{    array\_push(\$action\_res[\textcolor{stringliteral}{'errors'}], array(\textcolor{stringliteral}{'id'} => 930,}
+\DoxyCodeLine{                                            \textcolor{stringliteral}{'htmlcode'} => 422,}
+\DoxyCodeLine{                                            \textcolor{stringliteral}{'message'} => \textcolor{stringliteral}{"can't get data for this node type (not supported)"}));}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Creare tante funzioni quanti sono i tipi prendendo come riferimento la funzione {\ttfamily \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{get\+Data\+Type0()}}}
+\end{DoxyEnumerate}
+
+E infine modificare lo script {\ttfamily /api/sysinfos/rssi.php}\+: aggiungere alla variabile\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{rssi_8php_a30b171fe8a5ff9619471dd477612d743}{\$data\_tables}} = array(\textcolor{stringliteral}{"t\_type0\_data"});}
+\end{DoxyCode}
+ i nuovi tipi. Esempio\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{rssi_8php_a30b171fe8a5ff9619471dd477612d743}{\$data\_tables}} = array(\textcolor{stringliteral}{"t\_type0\_data"}, \textcolor{stringliteral}{"t\_type1\_data"}, \textcolor{stringliteral}{"t\_type2\_data"});}
+\end{DoxyCode}
+\hypertarget{index_autotoc_md10}{}\doxysubsection{Requisiti}\label{index_autotoc_md10}
+
+\begin{DoxyItemize}
+\item php
+\item server web
+\item mysql
+\end{DoxyItemize}\hypertarget{index_autotoc_md11}{}\doxysubsection{Changelog}\label{index_autotoc_md11}
+{\bfseries{01\+\_\+01 2020-\/05-\/10\+:}} ~\newline
+ Primo commit\hypertarget{index_autotoc_md12}{}\doxysubsection{Autore}\label{index_autotoc_md12}
+Zenaro Stefano 

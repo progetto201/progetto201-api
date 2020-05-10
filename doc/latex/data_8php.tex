@@ -1,0 +1,206 @@
+\hypertarget{data_8php}{}\doxysection{api/sensors/data.php File Reference}
+\label{data_8php}\index{api/sensors/data.php@{api/sensors/data.php}}
+
+
+{\bfseries{D\+A\+TA}}\+: manages sensors data.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{data_8php_aa38e4f0af480e059e8121fd28f79114e}{get\+Options}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns user\textquotesingle{}s options from the t\+\_\+options table. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{data_8php_a99f560ad0ae5d8b9707effd068a77aad}{get\+Nodetype}} (\$t\+\_\+conn\+\_\+res, \$nodeid)
+\begin{DoxyCompactList}\small\item\em Returns the node type of a node with id \$nodeid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{get\+Data\+Type0}} (\$t\+\_\+conn\+\_\+res, \$nodeid, \$min\+\_\+timestamp, \$max\+\_\+timestamp)
+\begin{DoxyCompactList}\small\item\em Returns data of the node type 0, with id \$nodeid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}{get\+Data}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns the data of the node id requested by calling the correct get\+Data\+Type\+X() function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{data_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\char`\"{}errors\char`\"{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{D\+A\+TA}}\+: manages sensors data. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD -\/-\/$>$ returns the data of a sensor
+\end{DoxyItemize}\hypertarget{data_8php_autotoc_md19}{}\doxysubsubsection{Description}\label{data_8php_autotoc_md19}
+This script sets the returned {\bfseries{content type to J\+S\+ON}}, {\bfseries{includes the \mbox{\hyperlink{db__connection_8php}{db\+\_\+connection.\+php}} script}} \begin{quote}
+It is used to connect to My\+S\+QL and execute basic S\+E\+L\+E\+CT queries \end{quote}
+and then defines the response array.
+
+Many functions are defined\+: \begin{DoxyVerb} getOptions()
+\end{DoxyVerb}
+ Returns user\textquotesingle{}s options from the t\+\_\+options table. \begin{DoxyVerb} getNodetype()
+\end{DoxyVerb}
+ Returns the node type of a node with id \$nodeid. \begin{DoxyVerb} getData()
+\end{DoxyVerb}
+ Returns the data of the node id requested by calling the correct get\+Data\+Type\+X() function. \begin{DoxyVerb} getDataType0()
+\end{DoxyVerb}
+ Returns data of the node type 0, with id \$nodeid.
+
+If the script isn\textquotesingle{}t included it tries to connect to the database, and checks the request method\+:
+\begin{DoxyItemize}
+\item if the method is G\+ET it calls the \mbox{\hyperlink{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}{get\+Data()}} function \begin{quote}
+Which calls all the other functions \end{quote}
+
+\end{DoxyItemize}
+
+When the called function ends the connection to the DB gets terminated, and data (or errors) is collected inside the response array. The response array gets echoed to the client in J\+S\+ON format
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{900}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{901}} -\/ main\+: No data but also No errors
+\item {\bfseries{910}} -\/ \mbox{\hyperlink{data_8php_a99f560ad0ae5d8b9707effd068a77aad}{get\+Nodetype()}}\+: Query returned nothing
+\item {\bfseries{911}} -\/ \mbox{\hyperlink{data_8php_a99f560ad0ae5d8b9707effd068a77aad}{get\+Nodetype()}}\+: Error executing query
+\item {\bfseries{920}} -\/ \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{get\+Data\+Type0()}}\+: Query returned nothing
+\item {\bfseries{921}} -\/ \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{get\+Data\+Type0()}}\+: Error executing query
+\item {\bfseries{930}} -\/ \mbox{\hyperlink{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}{get\+Data()}}\+: can\textquotesingle{}t get data for this node type (not supported)
+\item {\bfseries{931}} -\/ \mbox{\hyperlink{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}{get\+Data()}}\+: nodeid is not set in the request
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}\label{data_8php_a0cdaf0785f61e85d4ebb6fceb1370e12}} 
+\index{data.php@{data.php}!getData@{getData}}
+\index{getData@{getData}!data.php@{data.php}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily get\+Data (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns the data of the node id requested by calling the correct get\+Data\+Type\+X() function. 
+
+First checks if a node id was specified in the request, then gets the timestamps from the options table by calling the \mbox{\hyperlink{data_8php_aa38e4f0af480e059e8121fd28f79114e}{get\+Options()}} function.
+
+Next it gets the node type of the node by calling the \mbox{\hyperlink{data_8php_a99f560ad0ae5d8b9707effd068a77aad}{get\+Nodetype()}} function. Based on the node type, the correct function is called to collect the data of that node.
+
+Example\+:
+\begin{DoxyItemize}
+\item if the node type is \char`\"{}0\char`\"{}, the table is \char`\"{}t\+\_\+type0\+\_\+data\char`\"{} and the function that collects the data is called \mbox{\hyperlink{data_8php_a30bb48b8b324457b5453ee7580837f67}{get\+Data\+Type0()}}
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{data_8php_a30bb48b8b324457b5453ee7580837f67}\label{data_8php_a30bb48b8b324457b5453ee7580837f67}} 
+\index{data.php@{data.php}!getDataType0@{getDataType0}}
+\index{getDataType0@{getDataType0}!data.php@{data.php}}
+\doxysubsubsection{\texorpdfstring{getDataType0()}{getDataType0()}}
+{\footnotesize\ttfamily get\+Data\+Type0 (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res,  }\item[{}]{\$nodeid,  }\item[{}]{\$min\+\_\+timestamp,  }\item[{}]{\$max\+\_\+timestamp }\end{DoxyParamCaption})}
+
+
+
+Returns data of the node type 0, with id \$nodeid. 
+
+If the request has a \char`\"{}latest\char`\"{} parameter, return the last data from that node, else check if the client wants all the data (\$min\+\_\+timestamp e \$max\+\_\+timestamp are zero) or part of the data ( \$min\+\_\+timestamp $<$= timestamp $<$= \$max\+\_\+timestamp).
+
+The data is then returned by the function.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+int & {\em \$nodeid} & integer that identifies the node \\
+\hline
+int & {\em \$min\+\_\+timestamp} & timestamp set as the start date for data plotting \\
+\hline
+int & {\em \$max\+\_\+timestamp} & timestamp set as the end date for data plotting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{data_8php_a99f560ad0ae5d8b9707effd068a77aad}\label{data_8php_a99f560ad0ae5d8b9707effd068a77aad}} 
+\index{data.php@{data.php}!getNodetype@{getNodetype}}
+\index{getNodetype@{getNodetype}!data.php@{data.php}}
+\doxysubsubsection{\texorpdfstring{getNodetype()}{getNodetype()}}
+{\footnotesize\ttfamily get\+Nodetype (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res,  }\item[{}]{\$nodeid }\end{DoxyParamCaption})}
+
+
+
+Returns the node type of a node with id \$nodeid. 
+
+The function selects the type id using the node id.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+int & {\em \$nodeid} & integer that identifies the node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{data_8php_aa38e4f0af480e059e8121fd28f79114e}\label{data_8php_aa38e4f0af480e059e8121fd28f79114e}} 
+\index{data.php@{data.php}!getOptions@{getOptions}}
+\index{getOptions@{getOptions}!data.php@{data.php}}
+\doxysubsubsection{\texorpdfstring{getOptions()}{getOptions()}}
+{\footnotesize\ttfamily get\+Options (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns user\textquotesingle{}s options from the t\+\_\+options table. 
+
+It executes the S\+E\+L\+E\+CT query to get this data\+:
+\begin{DoxyItemize}
+\item color\+\_\+scheme\+: color name selected by the user
+\item min\+\_\+timestamp\+: timestamp set as the start date for data plotting
+\item max\+\_\+timestamp\+: timestamp set as the end date for data plotting
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$query\+\_\+arr array with errors or data 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{data_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{data_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{data.php@{data.php}!\$response@{\$response}}
+\index{\$response@{\$response}!data.php@{data.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\char`\"{}errors\char`\"{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

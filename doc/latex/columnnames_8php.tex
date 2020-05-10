@@ -1,0 +1,104 @@
+\hypertarget{columnnames_8php}{}\doxysection{api/sensors/columnnames.php File Reference}
+\label{columnnames_8php}\index{api/sensors/columnnames.php@{api/sensors/columnnames.php}}
+
+
+{\bfseries{C\+O\+L\+U\+M\+N\+N\+A\+M\+ES}}\+: manages columns\textquotesingle{} names.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns the name of the colums in a data table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{columnnames_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\char`\"{}errors\char`\"{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{columnnames_8php_ad9404234fc8b66e3b57df12629bf5d21}{\$nodetypes}} = array(\char`\"{}0\char`\"{} =$>$ \char`\"{}t\+\_\+type0\+\_\+data\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{C\+O\+L\+U\+M\+N\+N\+A\+M\+ES}}\+: manages columns\textquotesingle{} names. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD -\/-\/$>$ returns columns\textquotesingle{} names
+\end{DoxyItemize}\hypertarget{columnnames_8php_autotoc_md18}{}\doxysubsubsection{Description}\label{columnnames_8php_autotoc_md18}
+This script sets the returned {\bfseries{content type to J\+S\+ON}}, {\bfseries{includes the \mbox{\hyperlink{db__connection_8php}{db\+\_\+connection.\+php}} script}} \begin{quote}
+It is used to connect to My\+S\+QL and execute basic S\+E\+L\+E\+CT queries \end{quote}
+and then defines the response array.
+
+One function is defined\+: \begin{DoxyVerb} getColumNames()
+\end{DoxyVerb}
+ Returns the name of the colums in a data table.
+
+If the script isn\textquotesingle{}t included it tries to connect to the database, and checks the request method\+:
+\begin{DoxyItemize}
+\item if the method is G\+ET it calls the \mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names()}} function
+\end{DoxyItemize}
+
+When the called function ends the connection to the DB gets terminated, and data (or errors) is collected inside the response array. The response array gets echoed to the client in J\+S\+ON format
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{1000}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{1001}} -\/ main\+: No data but also No errors
+\item {\bfseries{1010}} -\/ \mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names()}}\+: Query returned nothing
+\item {\bfseries{1011}} -\/ \mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names()}}\+: Error executing query
+\item {\bfseries{1012}} -\/ \mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names()}}\+: Nodetype not recognised
+\item {\bfseries{1013}} -\/ \mbox{\hyperlink{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}{get\+Colum\+Names()}}\+: typeid is not set in request
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}\label{columnnames_8php_a523d0a0b5e1fe1d4df5bc381c5e3e2d1}} 
+\index{columnnames.php@{columnnames.php}!getColumNames@{getColumNames}}
+\index{getColumNames@{getColumNames}!columnnames.php@{columnnames.php}}
+\doxysubsubsection{\texorpdfstring{getColumNames()}{getColumNames()}}
+{\footnotesize\ttfamily get\+Colum\+Names (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns the name of the colums in a data table. 
+
+First it checks that typeid is set both in the request and in the \$nodetypes array, then a S\+E\+L\+E\+CT query is executed to retrieve the column names.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the DB connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or data 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{columnnames_8php_ad9404234fc8b66e3b57df12629bf5d21}\label{columnnames_8php_ad9404234fc8b66e3b57df12629bf5d21}} 
+\index{columnnames.php@{columnnames.php}!\$nodetypes@{\$nodetypes}}
+\index{\$nodetypes@{\$nodetypes}!columnnames.php@{columnnames.php}}
+\doxysubsubsection{\texorpdfstring{\$nodetypes}{$nodetypes}}
+{\footnotesize\ttfamily \$nodetypes = array(\char`\"{}0\char`\"{} =$>$ \char`\"{}t\+\_\+type0\+\_\+data\char`\"{})}
+
+\mbox{\Hypertarget{columnnames_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{columnnames_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{columnnames.php@{columnnames.php}!\$response@{\$response}}
+\index{\$response@{\$response}!columnnames.php@{columnnames.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\char`\"{}errors\char`\"{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

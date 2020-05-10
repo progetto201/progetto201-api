@@ -1,0 +1,129 @@
+\hypertarget{plans_8php}{}\doxysection{api/plans/plans.php File Reference}
+\label{plans_8php}\index{api/plans/plans.php@{api/plans/plans.php}}
+
+
+{\bfseries{P\+L\+A\+NS}}\+: manages plans (returns paths and names).  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}{get\+\_\+plans}} (\$path)
+\begin{DoxyCompactList}\small\item\em Returns an array with plans data (plans are stored in \char`\"{}/static/img/maps\char`\"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{plans_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{plans_8php_abad153ce82758430885486ec45cd4807}{\$mapspath}} = \$\+\_\+\+S\+E\+R\+V\+ER\mbox{[}\textquotesingle{}D\+O\+C\+U\+M\+E\+N\+T\+\_\+\+R\+O\+OT\textquotesingle{}\mbox{]} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}static\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}img\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}maps\char`\"{}
+\begin{DoxyCompactList}\small\item\em Plan\textquotesingle{}s path (file system) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{P\+L\+A\+NS}}\+: manages plans (returns paths and names). 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD\+: returns plan\textquotesingle{}s data
+\end{DoxyItemize}
+
+The script calls \mbox{\hyperlink{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}{get\+\_\+plans()}} function to get the plans that are inside the plans folder
+
+Error codes\+:
+\begin{DoxyItemize}
+\item {\bfseries{400}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{401}} -\/ main\+: No data but also No errors
+\item {\bfseries{410}} -\/ \mbox{\hyperlink{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}{get\+\_\+plans()}}\+: scandir() error\+: incorrect/non existing folder on path
+\item {\bfseries{411}} -\/ \mbox{\hyperlink{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}{get\+\_\+plans()}}\+: Unknown error during plans extraction
+\item {\bfseries{412}} -\/ \mbox{\hyperlink{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}{get\+\_\+plans()}}\+: No maps where found in \$path
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}\label{plans_8php_a9f83d2d9207f84899a3e5e4fe35bb5ac}} 
+\index{plans.php@{plans.php}!get\_plans@{get\_plans}}
+\index{get\_plans@{get\_plans}!plans.php@{plans.php}}
+\doxysubsubsection{\texorpdfstring{get\_plans()}{get\_plans()}}
+{\footnotesize\ttfamily get\+\_\+plans (\begin{DoxyParamCaption}\item[{}]{\$path }\end{DoxyParamCaption})}
+
+
+
+Returns an array with plans data (plans are stored in \char`\"{}/static/img/maps\char`\"{}). 
+
+The function finds the path of each file inside the maps folder and checks the mime type\+:
+
+if a files is an S\+VG file it gets stored inside the maps array as an associative array with these properties\+:
+\begin{DoxyItemize}
+\item \char`\"{}name\char`\"{}\+: file name
+\item \char`\"{}path\char`\"{}\+: path relative to the webserver\textquotesingle{}s root (\char`\"{}/static/img/maps/$<$file.\+svg$>$\char`\"{})
+\end{DoxyItemize}
+
+Example\+: G\+ET /api/plans/plans.php 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: [}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"name"}: \textcolor{stringliteral}{"colorful"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"path"}: \textcolor{stringliteral}{"/static/img/maps/colorful.svg"}}
+\DoxyCodeLine{      \},}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"name"}: \textcolor{stringliteral}{"realistic"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"path"}: \textcolor{stringliteral}{"/static/img/maps/realistic.svg"}}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{ \}}
+\end{DoxyCode}
+
+
+Error codes\+:
+\begin{DoxyItemize}
+\item {\bfseries{410}}\+: scandir() error\+: incorrect/non existing folder on path
+\item {\bfseries{411}}\+: Unknown error during plans extraction
+\item {\bfseries{412}}\+: No maps where found in \$path
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$path} & file system path with plans \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or plans data 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{plans_8php_abad153ce82758430885486ec45cd4807}\label{plans_8php_abad153ce82758430885486ec45cd4807}} 
+\index{plans.php@{plans.php}!\$mapspath@{\$mapspath}}
+\index{\$mapspath@{\$mapspath}!plans.php@{plans.php}}
+\doxysubsubsection{\texorpdfstring{\$mapspath}{$mapspath}}
+{\footnotesize\ttfamily \$mapspath = \$\+\_\+\+S\+E\+R\+V\+ER\mbox{[}\textquotesingle{}D\+O\+C\+U\+M\+E\+N\+T\+\_\+\+R\+O\+OT\textquotesingle{}\mbox{]} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}static\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}img\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}maps\char`\"{}}
+
+
+
+Plan\textquotesingle{}s path (file system) 
+
+\mbox{\Hypertarget{plans_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{plans_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{plans.php@{plans.php}!\$response@{\$response}}
+\index{\$response@{\$response}!plans.php@{plans.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

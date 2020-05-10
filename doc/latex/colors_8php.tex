@@ -1,0 +1,207 @@
+\hypertarget{colors_8php}{}\doxysection{api/colors/colors.php File Reference}
+\label{colors_8php}\index{api/colors/colors.php@{api/colors/colors.php}}
+
+
+{\bfseries{C\+O\+L\+O\+RS}}\+: manages the colors table.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Returns the colors data inside an associative array (the key is called \textquotesingle{}data\textquotesingle{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{colors_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Default response array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{C\+O\+L\+O\+RS}}\+: manages the colors table. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD -\/-\/$>$ returns the colors
+\end{DoxyItemize}\hypertarget{colors_8php_autotoc_md13}{}\doxysubsubsection{Description}\label{colors_8php_autotoc_md13}
+This script sets the content type to \char`\"{}\+J\+S\+O\+N\char`\"{}, includes the \mbox{\hyperlink{db__connection_8php}{db\+\_\+connection.\+php}} script \begin{quote}
+Which is used to connect to My\+S\+QL and to execute simple select queries (no prepared statements) \end{quote}
+
+
+and then it defines the response array.
+
+A function is defined\+: \begin{DoxyVerb}get_colors($t_conn_res)
+\end{DoxyVerb}
+ Returns colors data inside an associative array. The name of its key is \textquotesingle{}data\textquotesingle{}.
+
+If the script is not included in other scripts, the script tries to connect to the database, and checks the request method\+:
+\begin{DoxyItemize}
+\item if the method is G\+ET the script returns the colors data
+\end{DoxyItemize}
+
+When the function finishes, the script closes the connection to the DB, and the data (or errors) is collected in the \char`\"{}response\char`\"{} array. The response array is then returned to the client in J\+S\+ON format
+
+List of possible errors\+:
+\begin{DoxyItemize}
+\item {\bfseries{300}} -\/ main\+: Method not supported by the target resource
+\item {\bfseries{301}} -\/ main\+: No data but also No errors
+\item {\bfseries{310}} -\/ \mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors()}}\+: Query returned nothing
+\item {\bfseries{311}} -\/ \mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors()}}\+: Error executing query
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{colors_8php_a58266b8e421a6e017378bf42110952a4}\label{colors_8php_a58266b8e421a6e017378bf42110952a4}} 
+\index{colors.php@{colors.php}!get\_colors@{get\_colors}}
+\index{get\_colors@{get\_colors}!colors.php@{colors.php}}
+\doxysubsubsection{\texorpdfstring{get\_colors()}{get\_colors()}}
+{\footnotesize\ttfamily get\+\_\+colors (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Returns the colors data inside an associative array (the key is called \textquotesingle{}data\textquotesingle{}). 
+
+The function, using the mysqli object inside the \$t\+\_\+conn\+\_\+res parameter (\$t\+\_\+conn\+\_\+res\mbox{[}\textquotesingle{}connect\+\_\+obj\textquotesingle{}\mbox{]}), executes the \textquotesingle{}\$query\textquotesingle{} query that collects the colors requested by the client.
+
+The returned data depends on which parameters were passed with the request\+:
+\begin{DoxyItemize}
+\item if the request has an \textquotesingle{}n\textquotesingle{} parameter\+: returns that number of colors
+\item if the request has the \textquotesingle{}min\textquotesingle{} and \textquotesingle{}max\textquotesingle{} parameters\+: returns the colors with an id value between those values
+\item otherwise\+: returns all the colors
+\end{DoxyItemize}
+
+The data of the each color is contained inside an associative array\+:
+\begin{DoxyItemize}
+\item {\bfseries{id}}\+: identification number
+\item {\bfseries{color\+\_\+name}}\+: name of the color
+\item {\bfseries{color\+\_\+hex}}\+: hexadecimal value of the color \begin{quote}
+the format of color\+\_\+hex is\+:
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#RRGGBB}}
+\end{DoxyCode}
+ \end{quote}
+
+\end{DoxyItemize}
+
+If the query execution throws an error, the error is collected in the array with the \textquotesingle{}errors\textquotesingle{} key. The errors have 3 properties\+:
+\begin{DoxyItemize}
+\item {\bfseries{id}}\+: identifies the error in the A\+PI
+\item {\bfseries{htmlcode}}\+: its the response status code
+\item {\bfseries{message}}\+: details about the error \begin{quote}
+the error message is written in english \end{quote}
+
+\end{DoxyItemize}\hypertarget{colors_8php_autotoc_md14}{}\doxyparagraph{Examples\+:}\label{colors_8php_autotoc_md14}
+
+\begin{DoxyItemize}
+\item Example with no errors and without parameters 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GET /api/colors/colors.php}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: [\{}
+\DoxyCodeLine{      \textcolor{stringliteral}{"id"}: \textcolor{stringliteral}{"4384"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#f44336"}}
+\DoxyCodeLine{  \},}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{      \textcolor{stringliteral}{"id"}: \textcolor{stringliteral}{"4385"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"randomname"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#f44337"}}
+\DoxyCodeLine{  \},}
+\DoxyCodeLine{  ...}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\item Example with no errors and with the \textquotesingle{}n\textquotesingle{} parameter\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GET /api/colors/colors.php?n=3}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: [}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4379,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red lighten-\/5"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#ffebee"}}
+\DoxyCodeLine{      \},}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4380,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red lighten-\/4"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#ffcdd2"}}
+\DoxyCodeLine{      \},}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4381,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red lighten-\/3"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#ef9a9a"}}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\item Example with no errors and with the \textquotesingle{}min\textquotesingle{}/\textquotesingle{}max\textquotesingle{} parameter\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GET /api/colors/colors.php?min=4385\&max=4387}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{stringliteral}{"errors"}: [],}
+\DoxyCodeLine{  \textcolor{stringliteral}{"data"}: [}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4385,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red darken-\/1"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#e53935"}}
+\DoxyCodeLine{      \},}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4386,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red darken-\/2"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#d32f2f"}}
+\DoxyCodeLine{      \},}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{          \textcolor{stringliteral}{"id"}: 4387,}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_name"}: \textcolor{stringliteral}{"red darken-\/3"},}
+\DoxyCodeLine{          \textcolor{stringliteral}{"color\_hex"}: \textcolor{stringliteral}{"\#c62828"}}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+If there are errors, they are collected in the returned array. The function can retun the following errors\+:
+\begin{DoxyItemize}
+\item {\bfseries{310}}\+: Query returned nothing
+\item {\bfseries{311}}\+: Error executing query
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the connection object (connection is successfull) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with colors data (or error) 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{colors_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{colors_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{colors.php@{colors.php}!\$response@{\$response}}
+\index{\$response@{\$response}!colors.php@{colors.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())}
+
+
+
+Default response array. 
+

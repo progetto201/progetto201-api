@@ -1,0 +1,90 @@
+\hypertarget{date_8php}{}\doxysection{api/options/date.php File Reference}
+\label{date_8php}\index{api/options/date.php@{api/options/date.php}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{date_8php_aaaf0d348c4061c44138db217e717050f}{valid\+\_\+times}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Checks if the request timestamps are valid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{date_8php_a4d0c0508d0cfd38c221f532d560cd5d3}{set\+\_\+times}} (\$t\+\_\+conn\+\_\+res, \$mintime, \$maxtime)
+\begin{DoxyCompactList}\small\item\em Sets the timestamp\textquotesingle{}s range in the options table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{date_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{date_8php_a4d0c0508d0cfd38c221f532d560cd5d3}\label{date_8php_a4d0c0508d0cfd38c221f532d560cd5d3}} 
+\index{date.php@{date.php}!set\_times@{set\_times}}
+\index{set\_times@{set\_times}!date.php@{date.php}}
+\doxysubsubsection{\texorpdfstring{set\_times()}{set\_times()}}
+{\footnotesize\ttfamily set\+\_\+times (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res,  }\item[{}]{\$mintime,  }\item[{}]{\$maxtime }\end{DoxyParamCaption})}
+
+
+
+Sets the timestamp\textquotesingle{}s range in the options table. 
+
+The function prepares the U\+P\+D\+A\+TE query with two integers\+: \$mintime e \$maxtime.
+
+If the query executing throws an error or it doesn\textquotesingle{}t affect any row then the error is collected in the \$action\+\_\+res array.
+
+If there where no errors, the \textquotesingle{}data\textquotesingle{} of the \$action\+\_\+res array has the values sent by the request.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the connection object \\
+\hline
+int & {\em \$mintime} & minimum timestamp \\
+\hline
+int & {\em \$maxtime} & maximum timestamp \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with color data or errors 
+\end{DoxyReturn}
+\mbox{\Hypertarget{date_8php_aaaf0d348c4061c44138db217e717050f}\label{date_8php_aaaf0d348c4061c44138db217e717050f}} 
+\index{date.php@{date.php}!valid\_times@{valid\_times}}
+\index{valid\_times@{valid\_times}!date.php@{date.php}}
+\doxysubsubsection{\texorpdfstring{valid\_times()}{valid\_times()}}
+{\footnotesize\ttfamily valid\+\_\+times (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Checks if the request timestamps are valid. 
+
+The function collect the mintime and maxtime timestamps, checks if they are numbers.
+
+If they are numbers their values must be equal to zero or the mintime value has to be lower than the maxtime value.
+
+In these cases, the \mbox{\hyperlink{date_8php_a4d0c0508d0cfd38c221f532d560cd5d3}{set\+\_\+times()}} function is called to set the time in the DB.
+
+Otherwise an error is collected in the \$action\+\_\+res array
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with the connection object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with color data or errors 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{date_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{date_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{date.php@{date.php}!\$response@{\$response}}
+\index{\$response@{\$response}!date.php@{date.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\textquotesingle{}errors\textquotesingle{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

@@ -1,0 +1,88 @@
+\hypertarget{diskinfo_8php}{}\doxysection{api/sysinfos/diskinfo.php File Reference}
+\label{diskinfo_8php}\index{api/sysinfos/diskinfo.php@{api/sysinfos/diskinfo.php}}
+
+
+{\bfseries{D\+I\+S\+K\+I\+N\+FO}}\+: manages disk space information.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{diskinfo_8php_af65bd472f593ca92422150988c3f4dad}{Human\+Size}} (\$Bytes)
+\begin{DoxyCompactList}\small\item\em This function changes the measurement unit of bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{diskinfo_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\char`\"{}errors\char`\"{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{D\+I\+S\+K\+I\+N\+FO}}\+: manages disk space information. 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD\+: gets free, occupied and total space of the main partition.
+\end{DoxyItemize}
+
+The script identifies the OS to choose which is the main partition, uses built-\/in functions to get free and total space and calculates the occupied space.
+
+After that it uses the \mbox{\hyperlink{diskinfo_8php_af65bd472f593ca92422150988c3f4dad}{Human\+Size()}} function to convert free, total and occupied space in bytes to a human readable unit (for example MB, GB,...).
+
+Finally the data is printed to the client.
+
+Error codes\+:
+\begin{DoxyItemize}
+\item {\bfseries{700}} -\/ main\+: Request Method not supported by the target resource
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{diskinfo_8php_af65bd472f593ca92422150988c3f4dad}\label{diskinfo_8php_af65bd472f593ca92422150988c3f4dad}} 
+\index{diskinfo.php@{diskinfo.php}!HumanSize@{HumanSize}}
+\index{HumanSize@{HumanSize}!diskinfo.php@{diskinfo.php}}
+\doxysubsubsection{\texorpdfstring{HumanSize()}{HumanSize()}}
+{\footnotesize\ttfamily Human\+Size (\begin{DoxyParamCaption}\item[{}]{\$\+Bytes }\end{DoxyParamCaption})}
+
+
+
+This function changes the measurement unit of bytes. 
+
+A loop divides the passed value by 1024 until it gets smaller than 1024. During the loop an index gets incremented to choose the correct measurement unit.
+
+Finally the function rounds the value and returns an array with the value and the measurement unit.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$\+Bytes} & bytes to convert in a new measurement unit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$humanbytes array with new bytes value and human readable unit 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{diskinfo_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{diskinfo_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{diskinfo.php@{diskinfo.php}!\$response@{\$response}}
+\index{\$response@{\$response}!diskinfo.php@{diskinfo.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\char`\"{}errors\char`\"{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+

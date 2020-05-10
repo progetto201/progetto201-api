@@ -1,0 +1,120 @@
+\hypertarget{db__connection_8php}{}\doxysection{api/utils/db\+\_\+connection.php File Reference}
+\label{db__connection_8php}\index{api/utils/db\_connection.php@{api/utils/db\_connection.php}}
+
+
+{\bfseries{D\+B\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}}\+: manages database connection and queries.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db__connection_8php_a6b4b10bf19b4598790a69efb21ec5e96}{dbconn}} (\$dbname)
+\begin{DoxyCompactList}\small\item\em Connects to a database and returns errors or connection object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db__connection_8php_a12ea38d712987da8bb087c6371aa7675}{query\+To\+Array}} (\$t\+\_\+mysqli, \$t\+\_\+query)
+\begin{DoxyCompactList}\small\item\em This function executes the query and returns the data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db__connection_8php_a4071fde83850eb75386ada3b8f625c1c}{query\+To\+Json}} (\$t\+\_\+mysqli, \$t\+\_\+query)
+\begin{DoxyCompactList}\small\item\em Returns data as J\+S\+ON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db__connection_8php_accaf2f3c70dba0118191f0e541795ce8}{\$db\+\_\+dbname}} = \char`\"{}db100\+\_\+100\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{D\+B\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}}\+: manages database connection and queries. 
+
+This script defines a function to connect to the database and two function that execute queries (one returns data in an array and the other as J\+S\+ON)
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{db__connection_8php_a6b4b10bf19b4598790a69efb21ec5e96}\label{db__connection_8php_a6b4b10bf19b4598790a69efb21ec5e96}} 
+\index{db\_connection.php@{db\_connection.php}!dbconn@{dbconn}}
+\index{dbconn@{dbconn}!db\_connection.php@{db\_connection.php}}
+\doxysubsubsection{\texorpdfstring{dbconn()}{dbconn()}}
+{\footnotesize\ttfamily dbconn (\begin{DoxyParamCaption}\item[{}]{\$dbname }\end{DoxyParamCaption})}
+
+
+
+Connects to a database and returns errors or connection object. 
+
+This function connects to the database by reading credentials stored inside the \textquotesingle{}credentials.\+ini\textquotesingle{} file.
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$dbname} & database name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$conn\+\_\+res array with errors or connection object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{db__connection_8php_a12ea38d712987da8bb087c6371aa7675}\label{db__connection_8php_a12ea38d712987da8bb087c6371aa7675}} 
+\index{db\_connection.php@{db\_connection.php}!queryToArray@{queryToArray}}
+\index{queryToArray@{queryToArray}!db\_connection.php@{db\_connection.php}}
+\doxysubsubsection{\texorpdfstring{queryToArray()}{queryToArray()}}
+{\footnotesize\ttfamily query\+To\+Array (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+mysqli,  }\item[{}]{\$t\+\_\+query }\end{DoxyParamCaption})}
+
+
+
+This function executes the query and returns the data. 
+
+Executes the query, obtains data and stores it in an array, clears memory and returns the array
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$t\+\_\+mysqli} & connection object \\
+\hline
+string & {\em \$t\+\_\+query} & query to execute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$query\+\_\+res array with query data or errors 
+\end{DoxyReturn}
+\mbox{\Hypertarget{db__connection_8php_a4071fde83850eb75386ada3b8f625c1c}\label{db__connection_8php_a4071fde83850eb75386ada3b8f625c1c}} 
+\index{db\_connection.php@{db\_connection.php}!queryToJson@{queryToJson}}
+\index{queryToJson@{queryToJson}!db\_connection.php@{db\_connection.php}}
+\doxysubsubsection{\texorpdfstring{queryToJson()}{queryToJson()}}
+{\footnotesize\ttfamily query\+To\+Json (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+mysqli,  }\item[{}]{\$t\+\_\+query }\end{DoxyParamCaption})}
+
+
+
+Returns data as J\+S\+ON. 
+
+Uses the \mbox{\hyperlink{db__connection_8php_a12ea38d712987da8bb087c6371aa7675}{query\+To\+Array()}} to get data as an array and then encodes it into J\+S\+ON. \begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$t\+\_\+mysqli} & connection object \\
+\hline
+string & {\em \$t\+\_\+query} & query to execute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$query\+\_\+res array with query data or errors 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{db__connection_8php_accaf2f3c70dba0118191f0e541795ce8}\label{db__connection_8php_accaf2f3c70dba0118191f0e541795ce8}} 
+\index{db\_connection.php@{db\_connection.php}!\$db\_dbname@{\$db\_dbname}}
+\index{\$db\_dbname@{\$db\_dbname}!db\_connection.php@{db\_connection.php}}
+\doxysubsubsection{\texorpdfstring{\$db\_dbname}{$db\_dbname}}
+{\footnotesize\ttfamily \$db\+\_\+dbname = \char`\"{}db100\+\_\+100\char`\"{}}
+

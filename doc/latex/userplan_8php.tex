@@ -1,0 +1,178 @@
+\hypertarget{userplan_8php}{}\doxysection{api/plans/userplan.php File Reference}
+\label{userplan_8php}\index{api/plans/userplan.php@{api/plans/userplan.php}}
+
+
+{\bfseries{U\+S\+E\+R\+P\+L\+AN}}\+: manages user\textquotesingle{}s plan (returns paths and names).  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{userplan_8php_abad484f558ca389f1de13feac119c206}{get\+\_\+userplan}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em This function returns data relative to the plan selected from the user. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{userplan_8php_a08511c41316fcfd110eed454f22aee17}{userplan\+\_\+isvalid}} (\$t\+\_\+plan\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Checks if plan data is valid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}{post\+\_\+userplan}} (\$t\+\_\+conn\+\_\+res)
+\begin{DoxyCompactList}\small\item\em Sets user\textquotesingle{}s desired plan. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{userplan_8php_af4b6fb1bbc77ccc05f10da3b16935b99}{\$response}} = array(\char`\"{}errors\char`\"{} =$>$ array())
+\begin{DoxyCompactList}\small\item\em Prepare default response array with no errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{userplan_8php_a27d672a1a57cdac68d99472d32fa8ad7}{\$planspath}} = \$\+\_\+\+S\+E\+R\+V\+ER\mbox{[}\char`\"{}D\+O\+C\+U\+M\+E\+N\+T\+\_\+\+R\+O\+OT\char`\"{}\mbox{]} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}static\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}img\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}maps\char`\"{}
+\begin{DoxyCompactList}\small\item\em Plan\textquotesingle{}s path (file system) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{U\+S\+E\+R\+P\+L\+AN}}\+: manages user\textquotesingle{}s plan (returns paths and names). 
+
+Client perspective\+:
+\begin{DoxyItemize}
+\item {\bfseries{G\+ET}} M\+E\+T\+H\+OD\+: gets data about the selected plan
+\item {\bfseries{P\+O\+ST}} M\+E\+T\+H\+OD\+: sets a new plan
+\end{DoxyItemize}
+
+The script tries to connect to the database and then checks the request method.
+
+If the method is G\+ET \mbox{\hyperlink{userplan_8php_abad484f558ca389f1de13feac119c206}{get\+\_\+userplan()}} is called. Else \mbox{\hyperlink{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}{post\+\_\+userplan()}} is called. \begin{quote}
+\mbox{\hyperlink{userplan_8php_a08511c41316fcfd110eed454f22aee17}{userplan\+\_\+isvalid()}} is used to check if plan\textquotesingle{}s data is correct \end{quote}
+
+
+Error codes\+:
+\begin{DoxyItemize}
+\item {\bfseries{500}} -\/ main\+: Request Method not supported by the target resource
+\item {\bfseries{501}} -\/ main\+: No data but also No errors
+\item {\bfseries{510}} -\/ \mbox{\hyperlink{userplan_8php_abad484f558ca389f1de13feac119c206}{get\+\_\+userplan()}}\+: The query returned an unexpected number of records
+\item {\bfseries{511}} -\/ \mbox{\hyperlink{userplan_8php_abad484f558ca389f1de13feac119c206}{get\+\_\+userplan()}}\+: Error during query execution
+\item {\bfseries{520}} -\/ \mbox{\hyperlink{userplan_8php_a08511c41316fcfd110eed454f22aee17}{userplan\+\_\+isvalid()}}\+: file is not an S\+VG file
+\item {\bfseries{521}} -\/ \mbox{\hyperlink{userplan_8php_a08511c41316fcfd110eed454f22aee17}{userplan\+\_\+isvalid()}}\+: file not found
+\item {\bfseries{530}} -\/ \mbox{\hyperlink{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}{post\+\_\+userplan()}}\+: Unable to change the current plan for the new one
+\item {\bfseries{531}} -\/ \mbox{\hyperlink{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}{post\+\_\+userplan()}}\+: Unable to execute U\+P\+D\+A\+TE query
+\item {\bfseries{532}} -\/ \mbox{\hyperlink{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}{post\+\_\+userplan()}}\+: Parameter \textquotesingle{}name\textquotesingle{} wasn\textquotesingle{}t set
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+\begin{DoxyAuthor}{Author}
+Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\+com/mario33881}}) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{userplan_8php_abad484f558ca389f1de13feac119c206}\label{userplan_8php_abad484f558ca389f1de13feac119c206}} 
+\index{userplan.php@{userplan.php}!get\_userplan@{get\_userplan}}
+\index{get\_userplan@{get\_userplan}!userplan.php@{userplan.php}}
+\doxysubsubsection{\texorpdfstring{get\_userplan()}{get\_userplan()}}
+{\footnotesize\ttfamily get\+\_\+userplan (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+This function returns data relative to the plan selected from the user. 
+
+The function selects the plan name from the options table inside the database, concatenates the expected plan path with the name and returns both path and name inside an array.
+
+Errors list\+:
+\begin{DoxyItemize}
+\item 510\+: The query returned an unexpected number of records
+\item 511\+: Error during query execution
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & file system path with plans \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with errors or plans data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}\label{userplan_8php_a9ca20302d1cf18f2978f09188cc6782b}} 
+\index{userplan.php@{userplan.php}!post\_userplan@{post\_userplan}}
+\index{post\_userplan@{post\_userplan}!userplan.php@{userplan.php}}
+\doxysubsubsection{\texorpdfstring{post\_userplan()}{post\_userplan()}}
+{\footnotesize\ttfamily post\+\_\+userplan (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+conn\+\_\+res }\end{DoxyParamCaption})}
+
+
+
+Sets user\textquotesingle{}s desired plan. 
+
+First it checks if the client passed the plan name, then it checks if its expected path is valid using the \mbox{\hyperlink{userplan_8php_a08511c41316fcfd110eed454f22aee17}{userplan\+\_\+isvalid()}} function.
+
+After that it executes an U\+P\+D\+A\+TE query to set the new plan.
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{530}}\+: Unable to change the current plan for the new one
+\item {\bfseries{531}}\+: Unable to execute U\+P\+D\+A\+TE query
+\item {\bfseries{532}}\+: Parameter \textquotesingle{}name\textquotesingle{} wasn\textquotesingle{}t set
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+conn\+\_\+res} & array with connection object or errors \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$action\+\_\+res array with color data or errors 
+\end{DoxyReturn}
+\mbox{\Hypertarget{userplan_8php_a08511c41316fcfd110eed454f22aee17}\label{userplan_8php_a08511c41316fcfd110eed454f22aee17}} 
+\index{userplan.php@{userplan.php}!userplan\_isvalid@{userplan\_isvalid}}
+\index{userplan\_isvalid@{userplan\_isvalid}!userplan.php@{userplan.php}}
+\doxysubsubsection{\texorpdfstring{userplan\_isvalid()}{userplan\_isvalid()}}
+{\footnotesize\ttfamily userplan\+\_\+isvalid (\begin{DoxyParamCaption}\item[{}]{\$t\+\_\+plan\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Checks if plan data is valid. 
+
+To do this first its existance is checked using file\+\_\+exists() function, then the function checks the mime type (it must be \char`\"{}\+S\+V\+G\char`\"{}) If data is valid the \char`\"{}data\char`\"{} value will be true. Else the returned array has errors data.
+
+Errors list\+:
+\begin{DoxyItemize}
+\item {\bfseries{520}}\+: file is not an S\+VG file
+\item {\bfseries{521}}\+: file not found
+\end{DoxyItemize}
+
+\begin{DoxySince}{Since}
+01\+\_\+01 
+\end{DoxySince}
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$t\+\_\+plan\+\_\+data} & plan\textquotesingle{}s data to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array \$isvalid\+\_\+res array with errors or true 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{userplan_8php_a27d672a1a57cdac68d99472d32fa8ad7}\label{userplan_8php_a27d672a1a57cdac68d99472d32fa8ad7}} 
+\index{userplan.php@{userplan.php}!\$planspath@{\$planspath}}
+\index{\$planspath@{\$planspath}!userplan.php@{userplan.php}}
+\doxysubsubsection{\texorpdfstring{\$planspath}{$planspath}}
+{\footnotesize\ttfamily \$planspath = \$\+\_\+\+S\+E\+R\+V\+ER\mbox{[}\char`\"{}D\+O\+C\+U\+M\+E\+N\+T\+\_\+\+R\+O\+OT\char`\"{}\mbox{]} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}static\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}img\char`\"{} . D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+S\+E\+P\+A\+R\+A\+T\+OR . \char`\"{}maps\char`\"{}}
+
+
+
+Plan\textquotesingle{}s path (file system) 
+
+\mbox{\Hypertarget{userplan_8php_af4b6fb1bbc77ccc05f10da3b16935b99}\label{userplan_8php_af4b6fb1bbc77ccc05f10da3b16935b99}} 
+\index{userplan.php@{userplan.php}!\$response@{\$response}}
+\index{\$response@{\$response}!userplan.php@{userplan.php}}
+\doxysubsubsection{\texorpdfstring{\$response}{$response}}
+{\footnotesize\ttfamily \$response = array(\char`\"{}errors\char`\"{} =$>$ array())}
+
+
+
+Prepare default response array with no errors. 
+
