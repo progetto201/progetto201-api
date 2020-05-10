@@ -49,9 +49,10 @@ jobs:
         sudo service mysql restart
         sudo service mysql status
         echo "try to import sql file"
-        sudo mysql < "db100_100.sql"
         echo "try to change pwd of mysql"
         ./automysql/automysql.sh -mysqlpass test
+        echo "try to import sql file"
+        mysql -h 127.0.0.1 -P 3306 -u root -p test < "db100_100.sql"
     
     # "Install" the api by putting it in the www folder 
     - name: Move api to the www folder
