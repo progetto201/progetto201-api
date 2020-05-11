@@ -39,7 +39,7 @@ jobs:
         docker network connect sharedNet mysql-server
         echo -e "\n\n[NETWORK] Try to ping between containers"
         docker exec -i apache-php-api /bin/bash -c 'apt-get update && apt-get install -y net-tools iputils-ping'
-        docker exec -i apache-php-api ping mysql-server
+        docker exec -i apache-php-api ping -c 4 mysql-server
 
     # Install Python
     - name: Set up Python 3.7
