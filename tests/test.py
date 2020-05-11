@@ -22,7 +22,7 @@ class TestApi(unittest.TestCase):
         Otherwise the test will fail
         """
         # date.php url
-        url = "http://localhost/api/options/date.php"
+        url = "http://localhost/options/date.php"
 
         # loop for each test case
         for testcase in tc_date.testcases_date:

@@ -8,61 +8,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # download the autoinstall scripts
-    - name: Download autoinstall scripts
+    # download the repository
+    - name: Download repository
       uses: actions/checkout@v2
-      with:
-        repository: 'progetto201/progetto201-autoinstall'
-    
-    # Install apache and PHP
-    - name: Use autoinstall to install apache and PHP
+      
+    # Start and configure apache-php docker container
+    - name: Start Apache-PHP docker container
       run: |
-        ls -a
-        chmod +x autoapachephp/autoapachephp.sh
-        ./autoapachephp/autoapachephp.sh -apachephp
-        sudo apachectl -V
-    
-    # Install MySQL
-    - name: Use autoinstall to install mysql
+        echo -e "\n[APACHE-PHP] Start on port 80 (internal 80), name apache-php-api, put folder api in /var/www/html"
+        docker run -d -p 80:80 --name apache-php-api -v "$PWD/api":/var/www/html php:7.2-apache
+        echo -e "\n\n[APACHE-PHP] Create credentials file"
+        docker exec -it apache-php-api /bin/bash -c 'cd /var/www;mkdir credentials;echo -e "DB_HOST=mysql-server\nDB_USER100=root\nDB_PASS100=test" > credentials/credentials.ini'
+
+    # Start MySQL docker container
+    - name: Start MySQL docker container
       run: |
-        chmod +x automysql/automysql.sh
-        ./automysql/automysql.sh -mysql -mysqlforphp
-        sudo mkdir -p /var/run/mysqld
-        sudo chown mysql:mysql /var/run/mysqld
-        sudo mysqld_safe --skip-grant-tables -e "update user set authentication_string=password('test') where user='root';flush privileges;"
-        mysql -V
+        echo -e "\n[MYSQL] Create folder for the volume"
+        mkdir -p /storage/docker/mysql-datadir
+        echo -e "\n\n[MYSQL] Start MySQL container, port 3306 (internal 3306), name mysql-server, volume, root password: test"
+        docker run -d -p 3306:3306 --name mysql-server --volume=/storage/docker/mysql-datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test mysql:8.0.20
+    
+    # Set up the network between the containers
+    - name: Set up share network
+      run: |
+        echo -e "\n[NETWORK] Create the network"
+        docker network create sharedNet
+        echo -e "\n\n[NETWORK] Connect apache-php container to the network"
+        docker network connect sharedNet apache-php-api
+        echo -e "\n\n[NETWORK] Connect mysql-server container to the network"
+        docker network connect sharedNet mysql-server
+        echo -e "\n\n[NETWORK] Try to ping between containers"
+        docker exec -ti apache-php-api ping mysql-server
 
     # Install Python
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    
-    # Download this repository
-    - name: Download api scripts
-      uses: actions/checkout@v2
-    
-    # Import DB and change mysql pwd
-    - name: Config MySQL
-      run: |
-        ls -a
-        echo "check if mysql is present"
-        mysql -V
-        echo "restart mysql service"
-        sudo service mysql restart
-        sudo service mysql status
-        echo "try to import sql file"
-        
-        echo "try to import sql file"
-        mysql -h 127.0.0.1 -P 3306 --user=root --password=test < "db100_100.sql"
-    
-    # "Install" the api by putting it in the www folder 
-    - name: Move api to the www folder
-      run: |
-        sudo cp -r "api/." /var/www/
-        find /var/www
 
-    # Execute python script for the tests
-    - name: Execute Python Scripts
+    # Execute python test
+    - name: Execute Python Test
       run: |
         python tests/test.py

@@ -31,9 +31,9 @@ function dbconn($dbname){
     $ini_array = parse_ini_file(__dir__ . '/../../../credentials/credentials.ini');
     
     // db data
-    $servername = 'localhost';            // name/ip of the host
-    $username = $ini_array['DB_USER100']; // username
-    $password = $ini_array['DB_PASS100']; // password
+    $servername = $ini_array['DB_HOST'];    // name/ip of the host
+    $username = $ini_array['DB_USER100'];   // username
+    $password = $ini_array['DB_PASS100'];   // password
     
     // connect to the database
     $conn = new mysqli($servername, $username, $password, $dbname);
