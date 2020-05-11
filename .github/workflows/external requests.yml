@@ -38,7 +38,7 @@ jobs:
         echo -e "\n\n[NETWORK] Connect mysql-server container to the network"
         docker network connect sharedNet mysql-server
         echo -e "\n\n[NETWORK] Try to ping between containers"
-        docker exec -ti apache-php-api ping mysql-server
+        docker exec -i apache-php-api ping mysql-server
 
     # Install Python
     - name: Set up Python 3.7
