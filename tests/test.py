@@ -30,6 +30,7 @@ class TestApi(unittest.TestCase):
             response = requests.request(testcase["method"], url, headers=testcase["headers"], data = testcase["payload"])
             
             # try to convert the response in json data
+            print(response.text)
             json_data = json.loads(response.text)
 
             # check the expected output type: if it is a dictionary the expected result is one,
