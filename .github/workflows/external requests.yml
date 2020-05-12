@@ -26,10 +26,17 @@ jobs:
         
         echo -e "\n\n[APACHE-PHP] Add line to set ServerName (removes warning)"
         docker exec -i apache-php-api /bin/bash -c 'echo "ServerName localhost" >> /etc/apache2/apache2.conf'
-        
+    
+    # Install mysqli for PHP and restart apache accepting non 0 exit-code (container stops with code 129)
+    - name: Install mysqli for PHP and restart apache
+      run: |
         echo -e "\n\n[APACHE-PHP] Install mysqli and restart apache"
         docker exec -i apache-php-api /bin/bash -c 'docker-php-ext-install mysqli;apachectl restart'
-        
+      continue-on-error: true
+
+    # Set the correct permissions for the html folder
+    - name: Set permissions for the html folder
+      run: |
         echo -e "\n\n[APACHE-PHP] Set html permissions"
         docker exec -i apache-php-api /bin/bash -c 'cd /var/www/html;chmod -R 755 .'
 
