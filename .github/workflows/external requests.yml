@@ -48,7 +48,7 @@ jobs:
         echo -e "\n\n[MYSQL] Start MySQL container, port 3306 (internal 3306), name mysql-server, volume, root password: test"
         docker run -d -p 3306:3306 --name mysql-server --volume=/storage/docker/mysql-datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test mysql:5.7
         echo -e "\n\n[MYSQL] Import database"
-        docker exec -i mysql-server /bin/bash -c "mysql -h 127.0.0.1 -P 3306 -u root --password=test" < db100_100.sql
+        docker exec -i mysql-server sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < db100_100.sql
     
     # Set up the network between the containers
     - name: Set up share network
