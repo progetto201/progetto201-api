@@ -28,27 +28,36 @@ function dbconn($dbname){
     $conn_res = array('errors' => array(), 'connect_obj' => NULL);
     
     // ini file with credentials
-    $ini_array = parse_ini_file(__dir__ . '/../../../credentials/credentials.ini');
-    
-    // db data
-    $servername = $ini_array['DB_HOST'];    // name/ip of the host
-    $username = $ini_array['DB_USER100'];   // username
-    $password = $ini_array['DB_PASS100'];   // password
-    
-    // connect to the database
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    // check if connection was successful
-    if ($conn->connect_error) {
-        // add the error
-        array_push($conn_res['errors'], array('id' => 110,
-                                              'htmlcode' => 500,
-                                              'message' => "Couldn't connect to the database"));
+    $ini_path = __dir__ . '/../../../credentials/credentials.ini';
+
+    if (file_exists($ini_path)){
+        $ini_array = parse_ini_file($ini_path);
+        
+        // db data
+        $servername = $ini_array['DB_HOST'];    // name/ip of the host
+        $username = $ini_array['DB_USER100'];   // username
+        $password = $ini_array['DB_PASS100'];   // password
+        
+        // connect to the database
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        
+        // check if connection was successful
+        if ($conn->connect_error) {
+            // add the error
+            array_push($conn_res['errors'], array('id' => 110,
+                                                'htmlcode' => 500,
+                                                'message' => 'Couldn\'t connect to the database'));
+        }
+        
+        $conn->set_charset('utf8mb4');
+        
+        $conn_res['connect_obj'] = $conn;
     }
-    
-    $conn->set_charset('utf8mb4');
-    
-    $conn_res['connect_obj'] = $conn;
+    else{
+        array_push($conn_res['errors'], array('id' => 111,
+                                              'htmlcode' => 500,
+                                              'message' => 'Config file doesn\'t exist'));
+    }
     
     return $conn_res;
 }

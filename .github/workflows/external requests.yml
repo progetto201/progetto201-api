@@ -16,9 +16,9 @@ jobs:
     - name: Start Apache-PHP docker container
       run: |
         echo -e "\n[APACHE-PHP] Start on port 80 (internal 80), name apache-php-api, put folder api in /var/www/html"
-        docker run -d -p 80:80 --name apache-php-api -v "$PWD/api":/var/www/html php:7.2-apache
+        docker run -d -p 80:80 --name apache-php-api -v "$PWD/www":/var/www php:7.2-apache
         echo -e "\n\n[APACHE-PHP] Create credentials file"
-        docker exec -i apache-php-api /bin/bash -c 'cd /var/www;mkdir credentials;echo -e "DB_HOST=mysql-server\nDB_USER100=root\nDB_PASS100=test" > credentials/credentials.ini'
+        docker exec -i apache-php-api /bin/bash -c 'cd /var/www;echo -e "DB_HOST=mysql-server\nDB_USER100=root\nDB_PASS100=test" > credentials/credentials.ini'
 
     # Start MySQL docker container
     - name: Start MySQL docker container

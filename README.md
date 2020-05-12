@@ -17,8 +17,10 @@ dalla frontend e di gestirli inserendo/aggiornando/rimuovendo dati sul database.
 ## Guida all'uso
 Importare in MySQL il database con tutte le tabelle con il file ```db100_100.sql```
 
-Posizionare la cartella ```api``` (con tutto il suo contenuto)
-nella cartella servita dal server web (per apache ```/var/www/html```)
+Posizionare il contenuto della cartella ```www``` 
+nella cartella servita dal server web (per apache ```/var/www```)
+e infine modificare le credenziali nel file ```credentials.ini``` per poter
+connettere PHP a MySQL
 
 ## Descrizione
 Per la documentazione di tutti gli script andare in [questa pagina](https://progetto201.github.io/progetto201-api/doc/html/files.html)

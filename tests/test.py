@@ -22,7 +22,7 @@ class TestApi(unittest.TestCase):
         Otherwise the test will fail
         """
         # date.php url
-        url = "http://localhost/options/date.php"
+        url = "http://localhost/api/options/date.php"
 
         # loop for each test case
         for testcase in tc_date.testcases_date:
@@ -30,8 +30,7 @@ class TestApi(unittest.TestCase):
             response = requests.request(testcase["method"], url, headers=testcase["headers"], data = testcase["payload"])
             
             # try to convert the response in json data
-            print(response.text)
-            json_data = json.loads(response.text)
+            json_data = response.json()
 
             # check the expected output type: if it is a dictionary the expected result is one,
             # otherwise the output could be one of the many expected results
