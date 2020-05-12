@@ -16,9 +16,15 @@ jobs:
     - name: Start Apache-PHP docker container
       run: |
         echo -e "\n[APACHE-PHP] Start on port 80 (internal 80), name apache-php-api, put folder api in /var/www/html"
-        docker run -d -p 80:80 --name apache-php-api -v "$PWD/www":/var/www php:7.2-apache
+        docker run -d -p 80:80 --name apache-php-api -v "$PWD/www/html":/var/www/html php:7.4-apache
+        echo -e "\n\n[APACHE-PHP] Copy api files to the container"
+        docker cp "$PWD/www/html/." apache-php-api:/var/www/html
         echo -e "\n\n[APACHE-PHP] Create credentials file"
-        docker exec -i apache-php-api /bin/bash -c 'cd /var/www;echo -e "DB_HOST=mysql-server\nDB_USER100=root\nDB_PASS100=test" > credentials/credentials.ini'
+        docker exec -i apache-php-api /bin/bash -c 'cd /var/www;mkdir credentials;echo -e "DB_HOST=mysql-server\nDB_USER100=root\nDB_PASS100=test" > credentials/credentials.ini'
+        echo -e "\n\n[APACHE-PHP] Install mysqli and restart apache"
+        docker exec -i apache-php-api /bin/bash -c 'docker-php-ext-install mysqli;apachectl restart'
+        echo -e "\n\n[APACHE-PHP] Set html permissions"
+        docker exec -i apache-php-api /bin/bash -c 'cd /var/www/html;chmod -R 755 .'
 
     # Start MySQL docker container
     - name: Start MySQL docker container
@@ -27,6 +33,8 @@ jobs:
         sudo mkdir -p /storage/docker/mysql-datadir
         echo -e "\n\n[MYSQL] Start MySQL container, port 3306 (internal 3306), name mysql-server, volume, root password: test"
         docker run -d -p 3306:3306 --name mysql-server --volume=/storage/docker/mysql-datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test mysql:8.0.20
+        echo -e "\n\n[MYSQL] Import database"
+        docker exec -i mysql-server mysql -uroot -ptest mysql < db100_100.sql
     
     # Set up the network between the containers
     - name: Set up share network
