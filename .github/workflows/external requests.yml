@@ -47,10 +47,7 @@ jobs:
         sudo mkdir -p /storage/docker/mysql-datadir
         echo -e "\n\n[MYSQL] Start MySQL container, port 3306 (internal 3306), name mysql-server, volume, root password: test"
         docker run -d -p 3306:3306 --name mysql-server --volume=/storage/docker/mysql-datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test mysql:5.7
-        echo -e "\n\n[MYSQL] Import database"
-        sudo docker exec -i mysql-server sh -c 'touch /var/run/mysqld/mysqld.sock;touch /var/run/mysqld/mysqld.pid;chown -R mysql:mysql /var/run/mysqld/mysqld.sock;chown -R mysql:mysql /var/run/mysqld/mysqld.pid;chmod -R 644 /var/run/mysqld/mysqld.sock'
-        sudo docker exec -i mysql-server sh -c 'exec mysql -h 127.0.0.1 -P 3306 -uroot -p"$MYSQL_ROOT_PASSWORD" --socket=/var/run/mysqld/mysqld.sock' < db100_100.sql
-    
+
     # Set up the network between the containers
     - name: Set up share network
       run: |
@@ -63,6 +60,15 @@ jobs:
         echo -e "\n\n[NETWORK] Try to ping between containers"
         docker exec -i apache-php-api /bin/bash -c 'apt-get update && apt-get install -y net-tools iputils-ping'
         docker exec -i apache-php-api ping -c 4 mysql-server
+
+    # Start second MySQL docker container to import the database
+    - name: Start second MySQL docker container
+      run: |
+        docker run -d -p 3307:3306 --name mysql-import -e MYSQL_ROOT_PASSWORD=test mysql:5.7
+        docker network connect sharedNet mysql-import
+        echo -e "\n\n[MYSQL] Import database"
+        sudo docker exec -i mysql-import sh -c 'touch /var/run/mysqld/mysqld.sock;touch /var/run/mysqld/mysqld.pid;chown -R mysql:mysql /var/run/mysqld/mysqld.sock;chown -R mysql:mysql /var/run/mysqld/mysqld.pid;chmod -R 644 /var/run/mysqld/mysqld.sock'
+        sudo docker exec -i mysql-import sh -c 'exec mysql -h mysql-server -P 3306 -uroot -ptest --socket=/var/run/mysqld/mysqld.sock' < db100_100.sql
 
     # Install Python
     - name: Set up Python 3.7
