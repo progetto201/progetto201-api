@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>progetto201 API: api/colors/colors.php File Reference</title>
+<title>progetto201 API: www/html/api/colors/colors.php File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_0188a3e6da905bc60aceb35bf790b8c9.html">api</a></li><li class="navelem"><a class="el" href="dir_5cc9a26b17b91b920b2235da3a01b23c.html">colors</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_5b91fe896655279d6afeb67d8a39e692.html">www</a></li><li class="navelem"><a class="el" href="dir_f7d3756803691839d6b25fb7b08f97b6.html">html</a></li><li class="navelem"><a class="el" href="dir_2588d0ba178b9f5c214f6d04d44e95ad.html">api</a></li><li class="navelem"><a class="el" href="dir_e2c07cdc0b343451123cde84585f54e9.html">colors</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -110,10 +110,14 @@ Description</h2>
 <li><b>301</b> - main: No data but also No errors</li>
 <li><b>310</b> - <a class="el" href="colors_8php.html#a58266b8e421a6e017378bf42110952a4" title="Returns the colors data inside an associative array (the key is called &#39;data&#39;).">get_colors()</a>: Query returned nothing</li>
 <li><b>311</b> - <a class="el" href="colors_8php.html#a58266b8e421a6e017378bf42110952a4" title="Returns the colors data inside an associative array (the key is called &#39;data&#39;).">get_colors()</a>: Error executing query</li>
+<li><b>312</b> - <a class="el" href="colors_8php.html#a58266b8e421a6e017378bf42110952a4" title="Returns the colors data inside an associative array (the key is called &#39;data&#39;).">get_colors()</a>: If 'min' is set so needs to be 'max' (and viceversa)</li>
 </ul>
 <dl class="section since"><dt>Since</dt><dd>01_01 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Stefano Zenaro (<a href="https://github.com/mario33881">https://github.com/mario33881</a>) </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><p class="startdd">Check if n is numeric and positive (now returns all the colors if n&lt;0) </p>
+<p class="enddd">Check if min and max are numeric and min &lt; max (currently returns "Query Returned nothing" in these cases)) </p>
+</dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a58266b8e421a6e017378bf42110952a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58266b8e421a6e017378bf42110952a4">&#9670;&nbsp;</a></span>get_colors()</h2>
@@ -222,6 +226,7 @@ Examples:</h3>
 <p>If there are errors, they are collected in the returned array. The function can retun the following errors:</p><ul>
 <li><b>310</b>: Query returned nothing</li>
 <li><b>311</b>: Error executing query</li>
+<li><b>312</b>: If 'min' is set so needs to be 'max' (and viceversa)</li>
 </ul>
 <dl class="section since"><dt>Since</dt><dd>01_01 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>

@@ -1,4 +1,4 @@
-testcases_date = [
+testcases = [
     # wrong request method
     {
         "method": "GET",

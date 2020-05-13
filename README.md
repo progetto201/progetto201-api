@@ -1,6 +1,8 @@
 # PROGETTO201-API
 This is the backend api of the "progetto201" project.
 
+Python requests test result: ![external requests](https://github.com/progetto201/progetto201-api/workflows/external%20requests/badge.svg)
+
 ## Sezioni
 * [Introduzione](#Introduzione)
 * [Guida all'uso](#guida-all-uso)

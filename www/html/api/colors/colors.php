@@ -36,12 +36,14 @@
  * - **301** - main: No data but also No errors
  * - **310** - get_colors(): Query returned nothing
  * - **311** - get_colors(): Error executing query
+ * - **312** - get_colors(): If 'min' is set so needs to be 'max' (and viceversa)
  * 
  * @file
  * @since 01_01
  * @author Stefano Zenaro (https://github.com/mario33881)
  * @copyright MIT
- * 
+ * @todo Check if n is numeric and positive (now returns all the colors if n<0)
+ * @todo Check if min and max are numeric and min < max (currently returns "Query Returned nothing" in these cases)) 
 */
 
 // Set the response type to JSON
@@ -163,6 +165,7 @@ $response = array('errors' => array());
  * The function can retun the following errors:
  * - **310**: Query returned nothing
  * - **311**: Error executing query
+ * - **312**: If 'min' is set so needs to be 'max' (and viceversa)
  * 
  * @since 01_01
  * @param array $t_conn_res array with the connection object (connection is successfull)
@@ -202,29 +205,42 @@ function get_colors($t_conn_res) {
         $stmt = $t_conn_res['connect_obj']->prepare($query);
     }
     
-    // execute query and get the result
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    // check if there was an error
-    if (!$stmt->error) {
-        // the query should return at least one row
-        if (!empty($result) && $result->num_rows > 0) {
-            $arr = $result->fetch_all(MYSQLI_ASSOC);
-            $action_res['data'] = $arr;
-        }
-        else{
-            // sql instruction gave 0 results
-            array_push($action_res["errors"], array('id' => 310,
-                                                    'htmlcode' => 500,
-                                                    'message' => "Query returned nothing"));
-        }
+    // be sure that both or none 'min' and 'max' were set
+    if (
+        (isset($_GET["min"]) && ! isset($_GET["max"])) ||  // if 'min' is set and 'max' is not set
+        (! isset($_GET["min"]) &&  isset($_GET["max"]))    // OR 'min' is not set and 'max' is set
+        ){
+            
+            // error: one of the two params wasn't set
+            array_push($action_res["errors"], array('id' => 312,
+                                                    'htmlcode' => 400,
+                                                    'message' => "If 'min' is set so needs to be 'max' (and viceversa)"));
     }
-    else {
-        // executing the query gave an error
-        array_push($action_res["errors"], array('id' => 311,
-                                                'htmlcode' => 500,
-                                                'message' => "Error executing query"));
+    else{
+        // execute query and get the result
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        // check if there was an error
+        if (!$stmt->error) {
+            // the query should return at least one row
+            if (!empty($result) && $result->num_rows > 0) {
+                $arr = $result->fetch_all(MYSQLI_ASSOC);
+                $action_res['data'] = $arr;
+            }
+            else{
+                // sql instruction gave 0 results
+                array_push($action_res["errors"], array('id' => 310,
+                                                        'htmlcode' => 500,
+                                                        'message' => "Query returned nothing"));
+            }
+        }
+        else {
+            // executing the query gave an error
+            array_push($action_res["errors"], array('id' => 311,
+                                                    'htmlcode' => 500,
+                                                    'message' => "Error executing query"));
+        }
     }
 
     return $action_res;

@@ -1,5 +1,5 @@
-\hypertarget{colors_8php}{}\doxysection{api/colors/colors.php File Reference}
-\label{colors_8php}\index{api/colors/colors.php@{api/colors/colors.php}}
+\hypertarget{colors_8php}{}\doxysection{www/html/api/colors/colors.php File Reference}
+\label{colors_8php}\index{www/html/api/colors/colors.php@{www/html/api/colors/colors.php}}
 
 
 {\bfseries{C\+O\+L\+O\+RS}}\+: manages the colors table.  
@@ -47,6 +47,7 @@ List of possible errors\+:
 \item {\bfseries{301}} -\/ main\+: No data but also No errors
 \item {\bfseries{310}} -\/ \mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors()}}\+: Query returned nothing
 \item {\bfseries{311}} -\/ \mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors()}}\+: Error executing query
+\item {\bfseries{312}} -\/ \mbox{\hyperlink{colors_8php_a58266b8e421a6e017378bf42110952a4}{get\+\_\+colors()}}\+: If \textquotesingle{}min\textquotesingle{} is set so needs to be \textquotesingle{}max\textquotesingle{} (and viceversa)
 \end{DoxyItemize}
 
 \begin{DoxySince}{Since}
@@ -58,6 +59,10 @@ Stefano Zenaro (\href{https://github.com/mario33881}{\texttt{ https\+://github.\
 \begin{DoxyCopyright}{Copyright}
 M\+IT 
 \end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Check if n is numeric and positive (now returns all the colors if n$<$0) 
+
+Check if min and max are numeric and min $<$ max (currently returns \char`\"{}\+Query Returned nothing\char`\"{} in these cases)) \end{DoxyRefDesc}
 
 
 \doxysubsection{Function Documentation}
@@ -179,6 +184,7 @@ If there are errors, they are collected in the returned array. The function can 
 \begin{DoxyItemize}
 \item {\bfseries{310}}\+: Query returned nothing
 \item {\bfseries{311}}\+: Error executing query
+\item {\bfseries{312}}\+: If \textquotesingle{}min\textquotesingle{} is set so needs to be \textquotesingle{}max\textquotesingle{} (and viceversa)
 \end{DoxyItemize}
 
 \begin{DoxySince}{Since}
