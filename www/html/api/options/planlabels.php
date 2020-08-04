@@ -194,7 +194,7 @@ function post_labels($t_conn_res){
     elseif (isset($_POST["remove"]) && isset($_POST["id"])){
         // the client wants to delete a label
 
-        $id = isset($_POST["id"]);
+        $id = $_POST["id"];
         $query = "DELETE FROM t_planlabels WHERE t_planlabels.id = ?";
 
         // prepare the query expecting one string ("s"), and execute it    
