@@ -368,7 +368,7 @@ CREATE TABLE `t_nodi` (
 
 CREATE TABLE `t_options` (
   `id` int(11) NOT NULL,
-  `color_scheme` varchar(15) NOT NULL,
+  `color_scheme` varchar(30) NOT NULL,
   `min_timestamp` int(11) NOT NULL,
   `max_timestamp` int(11) NOT NULL,
   `plan` varchar(20) NOT NULL
